@@ -1,0 +1,23 @@
+{
+  "name": "idkfa",
+  "version": "0.0.0",
+  "description": "Liber Primus Translator",
+  "main": "idkfa",
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "command-line-args": "^5.0.2",
+    "irc": "^0.5.2",
+    "mathjs": "^4.1.2",
+    "number-theory": "^1.1.0",
+    "pastebin-js": "^0.5.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "repository": "https://github.com/rtkd/idkfa.git"
+}
