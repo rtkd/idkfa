@@ -1,7 +1,6 @@
 /* jslint esnext: true */
 
 const Config    = {};
-const Private   = require('./private');
 
 /**
  * Command line arguments options
@@ -102,30 +101,30 @@ Config.input =
  */
 Config.irc =
 {
-    'isEnabled'     : true,
+    'isEnabled'     : false,
 
     'isWellFormed'  : /^lb (?:\-{1,2}(?:[a-z]+)(?: (?:[a-z0-9\.,\u16A0-\u16FF]+))+)(?: (?:\-{1,2}(?:[a-z]+)(?: )(?:[a-z0-9\.,\u16A0-\u16FF]+)))*$/ig, //(!) Build me
 
-    'owner'         : Private.irc.owner,
+    'owner'         : '',
 
-    'botalias'      : Private.irc.botalias,
+    'botalias'      : '',
 
-    'server'        : 'chat.freenode.net',
+    'server'        : '',
 
-    'nick'          : Private.irc.nick,
+    'nick'          : '',
 
     'options'   :
     {
-        'userName'              : Private.irc.options.userName,
-        'realName'              : Private.irc.options.realName,
-        'password'              : Private.irc.options.password,
+        'userName'              : '',
+        'realName'              : '',
+        'password'              : '',
         'port'                  : 6697,
         'localAddress'          : null,
         'debug'                 : true,
         'showErrors'            : true,
         'autoRejoin'            : true,
         'autoConnect'           : true,
-        'channels'              : Private.irc.options.channels,
+        'channels'              : '',
         'secure'                : true,
         'selfSigned'            : false,
         'certExpired'           : false,
@@ -155,11 +154,11 @@ Config.pastebin =
 {
     'user':
     {
-        'api_dev_key'       : Private.pastebin.user.api_dev_key,
+        'api_dev_key'       : '',
 
-        'api_user_name'     : Private.pastebin.user.api_user_name,
+        'api_user_name'     : '',
 
-        'api_user_password' : Private.pastebin.user.api_user_password
+        'api_user_password' : ''
     },
 
     'paste':
@@ -169,7 +168,7 @@ Config.pastebin =
         // 0 = Public, anonymous, 1 = Unlisted, anonymous, 2 = Private, user, 3 = Public, user
         'privacy'           : 2,
 
-        'duration'          :'1H'
+        'duration'          :'N'
     }
 };
 
