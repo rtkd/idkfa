@@ -101,15 +101,15 @@ Config.input =
  */
 Config.irc =
 {
-    'isEnabled'     : false,
+    'isEnabled'     : true,
 
     'isWellFormed'  : /^lb (?:\-{1,2}(?:[a-z]+)(?: (?:[a-z0-9\.,\u16A0-\u16FF]+))+)(?: (?:\-{1,2}(?:[a-z]+)(?: )(?:[a-z0-9\.,\u16A0-\u16FF]+)))*$/ig, //(!) Build me
 
-    'owner'         : '',
+    'owner'         : {},
 
     'botalias'      : '',
 
-    'server'        : '',
+    'server'        : 'chat.freenode.net',
 
     'nick'          : '',
 
@@ -120,17 +120,17 @@ Config.irc =
         'password'              : '',
         'port'                  : 6697,
         'localAddress'          : null,
-        'debug'                 : true,
-        'showErrors'            : true,
+        'debug'                 : false,
+        'showErrors'            : false,
         'autoRejoin'            : true,
         'autoConnect'           : true,
-        'channels'              : '',
+        'channels'              : [],
         'secure'                : true,
         'selfSigned'            : false,
         'certExpired'           : false,
         'floodProtection'       : true,
         'floodProtectionDelay'  : 900,
-        'sasl'                  : false,
+        'sasl'                  : true,
         'stripColors'           : true,
         'channelPrefixes'       : '&#',
         'messageSplit'          : 512,
@@ -154,11 +154,11 @@ Config.pastebin =
 {
     'user':
     {
-        'api_dev_key'       : '',
+        'api_dev_key'       : Private.pastebin.user.api_dev_key,
 
-        'api_user_name'     : '',
+        'api_user_name'     : Private.pastebin.user.api_user_name,
 
-        'api_user_password' : ''
+        'api_user_password' : Private.pastebin.user.api_user_password
     },
 
     'paste':
