@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-/* jslint esnext: true */
 
 const Args      = require('command-line-args');
 const Config    = require('./config');
@@ -84,9 +83,9 @@ const Util      = require('./lib/util');
 
         if (getIOC) Log.setData('IOC', cipherData.map(data => Stats.getIOC(data)));
 
-        if (getCharAt) Log.setData('CHAR_AT', cipherData.map(data => Options.charAt.map((item, i) => Stats.getCharAt(data, item))));
+        if (getCharAt) Log.setData('CHAR_AT', cipherData.map(data => Options.charAt.map((item) => Stats.getCharAt(data, item))));
 
-        if (getWordAt) Log.setData('WORD_AT', cipherData.map(data => Options.wordAt.map((item, i) => Stats.getWordAt(data, item))));
+        if (getWordAt) Log.setData('WORD_AT', cipherData.map(data => Options.wordAt.map((item) => Stats.getWordAt(data, item))));
 
         if (getCrib) Log.setData('CRIB', Crib.findCrib(sourceData, arrSourcePaths, Options.find));
 

@@ -1,4 +1,3 @@
-/* jslint esnext: true */
 
 const Config    = {};
 
@@ -45,7 +44,7 @@ Config.dict =
 Config.encoding =
 {
     // Is value a mathematical expression?
-    'isExpression'  : /^(\$\().+(\))+$/i, // (!) Fix me
+    'isExpression'  : /^\$\((.*?)\)$/i, // /^(\$\().+(\))+$/i
 
     // Is value from Futhark unicode range?
     'isFuthark'     : /^[\u16A0-\u16FF]+$/i,
@@ -54,7 +53,7 @@ Config.encoding =
     'isInteger'     : /^(0|[1-9]\d*)$/,
 
     // Is value comma separated values without leading zeros?
-    'isIntegerCSV'  : /^(?!(?:\d+[, ])*0\d)(?:\d+(?:\,\d+)*)+$/,
+    'isIntegerCSV'  : /^(?!(?:\d+[, ])*0\d)(?:\d+(?:,\d+)*)+$/,
 
     // Is value dot separated values without leading zeros? Repeat 0-5.
     'isIntegerDSV'  : /^(?!(?:\d+[. ])*0\d)(?:\d+(?:\.\d+){0,5}(?: |$))+$/,
@@ -103,11 +102,11 @@ Config.irc =
 {
     'isEnabled'     : true,
 
-    'isWellFormed'  : /^lb (?:\-{1,2}(?:[a-z]+)(?: (?:[a-z0-9\.,\u16A0-\u16FF]+))+)(?: (?:\-{1,2}(?:[a-z]+)(?: )(?:[a-z0-9\.,\u16A0-\u16FF]+)))*$/ig, //(!) Build me
+    //'isWellFormed'  : /^lb (?:\-{1,2}(?:[a-z]+)(?: (?:[a-z0-9\.,\u16A0-\u16FF]+))+)(?: (?:\-{1,2}(?:[a-z]+)(?: )(?:[a-z0-9\.,\u16A0-\u16FF]+)))*$/ig, //(!) Build me
 
     'owner'         : {},
 
-    'botalias'      : '',
+    'botalias'      : 'lb',
 
     'server'        : 'chat.freenode.net',
 
@@ -124,13 +123,13 @@ Config.irc =
         'showErrors'            : false,
         'autoRejoin'            : true,
         'autoConnect'           : true,
-        'channels'              : [],
+        'channels'              : [''],
         'secure'                : true,
         'selfSigned'            : false,
         'certExpired'           : false,
         'floodProtection'       : true,
         'floodProtectionDelay'  : 900,
-        'sasl'                  : true,
+        'sasl'                  : false,
         'stripColors'           : true,
         'channelPrefixes'       : '&#',
         'messageSplit'          : 512,
@@ -154,16 +153,16 @@ Config.pastebin =
 {
     'user':
     {
-        'api_dev_key'       : Private.pastebin.user.api_dev_key,
+        'api_dev_key'       : '',
 
-        'api_user_name'     : Private.pastebin.user.api_user_name,
+        'api_user_name'     : '',
 
-        'api_user_password' : Private.pastebin.user.api_user_password
+        'api_user_password' : ''
     },
 
     'paste':
     {
-        'api_paste_format'  :'javascript',
+        'api_paste_format'  :'js',
 
         // 0 = Public, anonymous, 1 = Unlisted, anonymous, 2 = Private, user, 3 = Public, user
         'privacy'           : 2,
