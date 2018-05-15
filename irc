@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-/* jslint esnext: true */
 
 const Config    = require('./config');
 const Crib      = require('./lib/crib');
@@ -17,92 +16,7 @@ const Util      = require('./lib/util');
 
 (() =>
 {
-    // Spawn bot
-    const bot = new NodeIRC.Client(Config.irc.server, Config.irc.nick, Config.irc.options);
-
-    // Add 'join' listener
-    bot.addListener('join', (channel, nick, message) => { if (nick === Config.irc.nick) bot.say(channel, `Options: https://github.com/rtkd/idkfa`); });
-
-    // Add 'message' listener
-    bot.addListener('message#', (nick, to, text, message) =>
-    {
-        try
-        {
-            // Get message recipient and arguments
-            let [recipient, cmd] = message.args;
-
-            // Check if msg is directed at bot, else just return null.
-            if (cmd.substr(0, 2) !== Config.irc.botalias) return null;
-
-            if (cmd.includes('help'))
-            {
-                bot.say(to, `Options: https://github.com/rtkd/idkfa`);
-                return;
-            }
-
-            // Parse and validate options
-            let options = Input.getOptions(parse(cmd));
-
-            // Generate data
-            let data = idkfa(options);
-
-            // Stringify data
-            let raw = JSON.stringify([...data]);
-
-            // If data too long send to pastebin
-            if (raw.length > 510) Pastebin.paste(JSON.stringify([...data]), Log.getNow(), response => bot.say(to, response));
-
-            // Else echo data to IRC
-            else [...data].map((item) => { bot.say(to, JSON.stringify(item)); });
-        }
-
-        catch (e) { bot.say(to, `${e}`); }
-    });
-
-    // Add 'private message' listener
-    bot.addListener('pm', (nick, text, message) => { console.log('pm', nick, text, message); });
-
-    // Add listener for errors so we don't crash
-    bot.addListener('error', message => { console.log('error', message); });
-
-    const parse = strCommand =>
-    {
-        // Will hold the options
-        let mapOptions = new Map();
-
-        // Split into single command strings
-        let arrParts = strCommand.split(/-+/);
-
-        // Get bot name and options from split commands
-        let [strBotName, ...arrOptions] = arrParts;
-
-        // Split command string into command and its values
-        arrOptions.map(strOption =>
-        {
-            // Need this to pick up mathematical expressions in command 'key'.. might be buggy
-            var [option, ...values] = [].concat.apply([], strOption.split("'").map((v, i) => i % 2 ? v : v.split(' '))).filter((Boolean));
-
-            // Set options
-            mapOptions.set(option, values);
-
-        });
-
-        // Check witch options are set
-        Object.keys(Config.input).map(item =>
-        {
-            // Get the command alias
-            let strAlias = item.substr(0, 1);
-
-            mapOptions.set(item, mapOptions.has(item) || mapOptions.has(strAlias) ? mapOptions.get(item) || mapOptions.get(strAlias) : []);
-        });
-
-        // Remove unknown options
-        mapOptions.forEach((value, key) => { if (!Config.input[key]) mapOptions.delete(key); });
-
-        return Array.from(mapOptions).reduce((obj, [key, value]) => (Object.assign(obj, { [key]: value })), {});
-    };
-
-    const idkfa = Options =>
+   const idkfa = Options =>
     {
         // Set options
         const arrKeys           = Options.key.length > 0 ? Options.key : ['0'];
@@ -166,9 +80,9 @@ const Util      = require('./lib/util');
 
         if (getIOC) Log.setData('IOC', cipherData.map(data => Stats.getIOC(data)));
 
-        if (getCharAt) Log.setData('CHAR_AT', cipherData.map(data => Options.charAt.map((item, i) => Stats.getCharAt(data, item))));
+        if (getCharAt) Log.setData('CHAR_AT', cipherData.map(data => Options.charAt.map((item) => Stats.getCharAt(data, item))));
 
-        if (getWordAt) Log.setData('WORD_AT', cipherData.map(data => Options.wordAt.map((item, i) => Stats.getWordAt(data, item))));
+        if (getWordAt) Log.setData('WORD_AT', cipherData.map(data => Options.wordAt.map((item) => Stats.getWordAt(data, item))));
 
         if (getCrib) Log.setData(`CRIB: ${Options.find.join(' ').toUpperCase()}`, Crib.findCrib(sourceData, arrSourcePaths, Options.find));
 
@@ -182,5 +96,96 @@ const Util      = require('./lib/util');
 
         return Log.getData();
     };
+
+    const parse = strCommand =>
+    {
+        // Will hold the options
+        let mapOptions = new Map();
+
+        // Get expressions from command string and remove single quotes
+        let arrMathEx = strCommand.match(/'(.*?)'/gim).map(exp => exp.replace(/'/gm, ''));
+
+        // Remove expressions and unwanted chars from command
+        let strNormalized = strCommand.replace(/'(.*?)'/gim, '').replace(/[^\w\u16A0-\u16FF-,. ]/gim, '');
+
+        // Split into single commands
+        let arrCommands = strNormalized.split(/[-]+/).filter(x => x);
+
+        // Remove bot name
+        let [, ...arrOptions] = arrCommands;
+
+        // Add commands to optopns
+        arrOptions.map(strOption =>
+        {
+            let [cmd, ...options] = strOption.split(' ').filter(x => x);
+
+            mapOptions.set(cmd, options);
+        });
+
+        // Add math options
+        if (mapOptions.has('k') && arrMathEx) mapOptions.set('k', mapOptions.get('k').concat(arrMathEx));
+
+        // Check witch options are set
+        Object.keys(Config.input).map(item =>
+        {
+            // Get the command alias
+            let strAlias = item.substr(0, 1);
+
+            mapOptions.set(item, mapOptions.has(item) || mapOptions.has(strAlias) ? mapOptions.get(item) || mapOptions.get(strAlias) : []);
+        });
+
+        // Remove unknown options
+        mapOptions.forEach((value, key) => { if (!Config.input[key]) mapOptions.delete(key); });
+
+        return Array.from(mapOptions).reduce((obj, [key, value]) => (Object.assign(obj, { [key]: value })), {});
+    };
+
+    // Spawn bot
+    const bot = new NodeIRC.Client(Config.irc.server, Config.irc.nick, Config.irc.options);
+
+    // Add 'join' listener
+    bot.addListener('join', (channel, nick) => { if (nick === Config.irc.nick) bot.say(channel, `Options: https://github.com/rtkd/idkfa`); });
+
+    // Add 'message' listener
+    bot.addListener('message#', (nick, to, text, message) =>
+    {
+        try
+        {
+            // Get message arguments
+            let [, cmd] = message.args;
+
+            // Check if msg is directed at bot, else just return null.
+            if (cmd.substr(0, 2) !== Config.irc.botalias) return null;
+
+            if (cmd.includes('help'))
+            {
+                bot.say(to, `Options: https://github.com/rtkd/idkfa`);
+                return;
+            }
+
+            // Parse and validate options
+            let options = Input.getOptions(parse(cmd));
+
+            // Generate data
+            let data = idkfa(options);
+
+            // Stringify data
+            let raw = JSON.stringify([...data]);
+
+            // If data too long send to pastebin
+            if (raw.length > 510) Pastebin.paste(JSON.stringify([...data]), Log.getNow(), response => bot.say(to, response));
+
+            // Else echo data to IRC
+            else [...data].map((item) => { bot.say(to, JSON.stringify(item)); });
+        }
+
+        catch (e) { bot.say(to, `${e}`); }
+    });
+
+    // Add 'private message' listener
+    bot.addListener('pm', () => null);
+
+    // Add listener for errors so we don't crash
+    bot.addListener('error', () => null);
 
 })();
