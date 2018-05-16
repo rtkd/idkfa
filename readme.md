@@ -48,7 +48,7 @@ Inverts/Reverses source, gematria and key properties
   * **o** — Invert gematria row: offset
   * **p** — Invert gematria row: prime
   * **s** — Reverse shift
-  * **t** — Reverse source text (not implemented yet)
+  * **t** — Reverse source text
 
 ##### -k, --key #####
 
