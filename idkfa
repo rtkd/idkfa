@@ -103,6 +103,3 @@ const Util      = require('./lib/util');
     catch (e) { Log.writeError(`${e}`); }
 
 })();
-
-// Chalk
-// Drag cribs
