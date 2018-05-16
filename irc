@@ -16,7 +16,7 @@ const Util      = require('./lib/util');
 
 (() =>
 {
-   const idkfa = Options =>
+    const idkfa = Options =>
     {
         // Set options
         const arrKeys           = Options.key.length > 0 ? Options.key : ['0'];
@@ -127,7 +127,7 @@ const Util      = require('./lib/util');
         // Add math options
         if (mapOptions.has('k') && arrMathEx) mapOptions.set('k', mapOptions.get('k').concat(arrMathEx));
 
-        // Check witch options are set
+        // Check which options are set
         Object.keys(Config.input).map(item =>
         {
             // Get the command alias
