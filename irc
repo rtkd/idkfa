@@ -103,7 +103,9 @@ const Util      = require('./lib/util');
         let mapOptions = new Map();
 
         // Get expressions from command string and remove single quotes
-        let arrMathEx = strCommand.match(/'(.*?)'/gim).map(exp => exp.replace(/'/gm, ''));
+        let arrMathEx = strCommand.match(/'(.*?)'/gim);
+
+        arrMathEx = arrMathEx ? arrMathEx.map(exp => exp.replace(/'/gm, '')) : null;
 
         // Remove expressions and unwanted chars from command
         let strNormalized = strCommand.replace(/'(.*?)'/gim, '').replace(/[^\w\u16A0-\u16FF-,. ]/gim, '');
@@ -149,8 +151,8 @@ const Util      = require('./lib/util');
     // Add 'message' listener
     bot.addListener('message#', (nick, to, text, message) =>
     {
-        try
-        {
+        //try
+        //{
             // Get message arguments
             let [, cmd] = message.args;
 
@@ -166,6 +168,8 @@ const Util      = require('./lib/util');
             // Parse and validate options
             let options = Input.getOptions(parse(cmd));
 
+            console.log(options);
+
             // Generate data
             let data = idkfa(options);
 
@@ -177,9 +181,9 @@ const Util      = require('./lib/util');
 
             // Else echo data to IRC
             else [...data].map((item) => { bot.say(to, JSON.stringify(item)); });
-        }
+        //}
 
-        catch (e) { bot.say(to, `${e}`); }
+        //catch (e) { bot.say(to, `${e}`); }
     });
 
     // Add 'private message' listener
