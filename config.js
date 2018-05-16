@@ -1,5 +1,10 @@
 
-const Config    = {};
+/**
+ * Will hold config
+ *
+ * @type       {object}
+ */
+const Config = {};
 
 /**
  * Command line arguments options
@@ -101,8 +106,6 @@ Config.input =
 Config.irc =
 {
     'isEnabled'     : true,
-
-    //'isWellFormed'  : /^lb (?:\-{1,2}(?:[a-z]+)(?: (?:[a-z0-9\.,\u16A0-\u16FF]+))+)(?: (?:\-{1,2}(?:[a-z]+)(?: )(?:[a-z0-9\.,\u16A0-\u16FF]+)))*$/ig, //(!) Build me
 
     'owner'         : {},
 
