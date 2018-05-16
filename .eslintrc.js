@@ -110,7 +110,7 @@ module.exports = {
             "separate-lines"
         ],
         "multiline-ternary": "off",
-        "new-cap": "error",
+        "new-cap": ["error", { "capIsNew": false }],
         "new-parens": "error",
         "newline-after-var": [
             "error",
