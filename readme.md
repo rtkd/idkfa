@@ -59,14 +59,16 @@ For details on using mathematical expressions see: [MathJS Functions](http://mat
 
 **Expressions must be enclosed in single quotation marks.**
 
-Function `primes()` will accept 0, 1 or 2 parameters of type `integer`
+Generator functions `int()` and `primes()` will accept 0, 1 or 2 parameters of type `integer`
 .
   
-  * 0 parameters will generate as many consecutive primes as the selected source has graphs.
-  * 1 parameter will generate first n consecutive primes, and repeat as source has graphs.
-  * 2 parameters will generate consecutive primes from n to n, and repeat as source has graphs.
+  * 0 parameters will generate as many consecutive integers/primes as the selected source has graphs.
+  * 1 parameter will generate first n consecutive integers/primes, and repeat as source has graphs.
+  * 2 parameters will generate consecutive integers/primes from n to n, and repeat as source has graphs.
 
-If first parameter is larger than second, order of primes will be reversed.
+If first parameter is larger than second, order of integers/primes will be reversed.
+
+Available transformations: Euler Phi `ephi()`, Möbius: `mobius()`
 
 ##### Examples #####
 
