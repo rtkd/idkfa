@@ -146,7 +146,10 @@ Config.irc =
 Config.math =
 {
     // Limit amount of generateable primes
-    'maxPrimes': 20000
+    'maxPrimes': 20000,
+
+    // Limit amount of generateable integers
+    'maxIntegers': 100000
 };
 
 /**
