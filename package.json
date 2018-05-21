@@ -10,7 +10,7 @@
     "command-line-args": "^5.0.2",
     "irc": "^0.5.2",
     "mathjs": "^4.1.2",
-    "number-theory": "^1.1.0",
+    "number-theory": "git+https://git@github.com/rsandor/number-theory.git",
     "pastebin-js": "^0.5.1"
   },
   "devDependencies": {
