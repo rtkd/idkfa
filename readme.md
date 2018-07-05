@@ -62,11 +62,11 @@ For details on using mathematical expressions see: [MathJS Functions](http://mat
 Generator functions `int()`, `odd()`, `even()`, `prime()`, `fib()` will accept 0, 1 or 2 parameters of type `integer`
 .
   
-  * 0 parameters will generate as many consecutive integers/primes as the selected source has graphs.
-  * 1 parameter will generate first n consecutive integers/primes, and repeat as source has graphs.
-  * 2 parameters will generate consecutive integers/primes from n to n, and repeat as source has graphs.
+  * 0 parameters will generate as many consecutive numbers as the selected source has graphs.
+  * 1 parameter will generate first n consecutive numbers, and repeat as source has graphs.
+  * 2 parameters will generate consecutive numbers from n to n, and repeat as source has graphs.
 
-If first parameter is larger than second, order of integers/primes will be reversed.
+If first parameter is larger than second, order of numbers will be reversed.
 
 Available transformations: Euler Phi `ephi()`, Möbius: `mob()`
 
