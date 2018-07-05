@@ -233,7 +233,7 @@ Segment: 6
 
 Segment: 16
 ```bash
-./idkfa -s 0.16 -v l -p s -k '$(ephi(x), x, primes())'
+./idkfa -s 0.16 -v l -p s -k '$(ephi(x), x, prime())'
 ```
 
 Segment: 17
