@@ -59,7 +59,7 @@ For details on using mathematical expressions see: [MathJS Functions](http://mat
 
 **Expressions must be enclosed in single quotation marks.**
 
-Generator functions `int()` and `primes()` will accept 0, 1 or 2 parameters of type `integer`
+Generator functions `int()`, `odd()`, `even()`, `prime()`, `fib()` will accept 0, 1 or 2 parameters of type `integer`
 .
   
   * 0 parameters will generate as many consecutive integers/primes as the selected source has graphs.
@@ -68,7 +68,7 @@ Generator functions `int()` and `primes()` will accept 0, 1 or 2 parameters of t
 
 If first parameter is larger than second, order of integers/primes will be reversed.
 
-Available transformations: Euler Phi `ephi()`, Möbius: `mobius()`
+Available transformations: Euler Phi `ephi()`, Möbius: `mob()`
 
 ##### Examples #####
 
