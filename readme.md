@@ -42,11 +42,11 @@ Inverts/Reverses source, gematria and key properties
 -i f
 ```
 
-  * **f** — Invert gematria row: futhark
+  * **f** — Invert gematria column: futhark
   * **k** — Invert key
-  * **l** — Invert gematria row: latin
-  * **o** — Invert gematria row: offset
-  * **p** — Invert gematria row: prime
+  * **l** — Invert gematria column: latin
+  * **o** — Invert gematria column: offset
+  * **p** — Invert gematria column: prime
   * **s** — Reverse shift
   * **t** — Reverse source text
 
