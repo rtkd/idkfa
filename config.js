@@ -51,7 +51,7 @@ Config.encoding =
     // Is value a mathematical expression?
     'isExpression'  : /^\$\((.*?)\)$/i, // /^(\$\().+(\))+$/i
 
-    // Is value from Futhark unicode range?
+    // Is value within Futhark unicode range?
     'isFuthark'     : /^[\u16A0-\u16FF]+$/i,
 
     // Is value an integer without leading zeros?
@@ -109,7 +109,7 @@ Config.irc =
 
     'owner'         : {},
 
-    'botalias'      : 'lb',
+    'botalias'      : '',
 
     'server'        : 'chat.freenode.net',
 
@@ -149,7 +149,10 @@ Config.math =
     'maxPrimes': 20000,
 
     // Limit amount of generateable integers
-    'maxIntegers': 100000
+    'maxIntegers': 100000,
+
+     // Limit amount of generateable fibonacci numbers
+    'maxFibonacci': 1000
 };
 
 /**
@@ -171,9 +174,9 @@ Config.pastebin =
         'api_paste_format'  :'js',
 
         // 0 = Public, anonymous, 1 = Unlisted, anonymous, 2 = Private, user, 3 = Public, user
-        'privacy'           : 2,
+        'privacy'           : 1,
 
-        'duration'          :'N'
+        'duration'          :'1M'
     }
 };
 
